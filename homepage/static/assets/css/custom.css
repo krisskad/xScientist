@@ -1,0 +1,50 @@
+.popup__wrapper{
+    padding: 3rem;
+    height: 100%;
+}
+.popup__wrapper form{
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: auto;
+}
+.popup__wrapper form input,.popup__wrapper form textarea{
+    outline: none;
+    border: none;
+    padding: 1rem;
+}
+.popup__wrapper form #name__id,.popup__wrapper form #email__id{
+    grid-column: span 2;
+}
+.popup__wrapper form #message__id{
+    grid-column: span 4;
+    resize: vertical;
+    max-height: 150px;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__wrapper form #name__id,.popup__wrapper form #email__id{
+        grid-column: span 4;
+    }
+    .popup__wrapper form #message__id{
+        grid-column: span 4;
+        resize: vertical;
+        max-height: 150px;
+    }
+}
+.member img, .portfolio__card img{
+    transition: .15s ease;
+}
+.member img:hover, .portfolio__card img:hover{
+    transform: scale(1.05,1.05);
+}
+.menu__link.svg {
+    display: block;
+    height: 2rem;
+}
+.menu__link svg{
+    fill: var(--clr-primary);
+    /* color: var(--clr-white); */
+    width: 1.5rem;
+    height: 1.5rem;
+}
