@@ -1,203 +1,113 @@
-// Get Header
-const header = document.getElementById('header');
+const canvas = document.getElementById("canvas");
+const heroContainer = document.getElementById("hero");
+const ctx = canvas.getContext("2d");
+var width = canvas.width = window.innerWidth;
+var height = canvas.height = window.innerHeight;
+ctx.fillStyle="#FFFFFF";
+ctx.lineWidth = 0.2;
 
-// Get menu list
-const menuList = document.getElementById('menuList');
+class Particle{
+  constructor(){
+    this.x = Math.random() * width;
+    this.y = Math.random() * height;
+    this.size = Math.random() * 5 + 1;
+    this.xA = Math.random() * 2 - 1;
+    this.yA = Math.random() * 2 - 1;
+    // this.angleX = Math.random() * 6.2;
+    // this.angleY = Math.random() * 6.2;
+    // this.vAngleX = Math.random() * 0.1 + 0.01;
+    // this.vAngleY = Math.random() * 0.1 + 0.01;
+  }
+  update(){
+    this.x+=this.xA;
+    this.y+=this.yA;
+    // this.x+=this.xA + Math.sin(this.angleX);
+    // this.y+=this.yA + Math.cos(this.angleY);
+    // this.angleX+=this.vAngleX;
+    // this.angleY+=this.vAngleY;
 
-// Get overLay layer
-const overlay = document.getElementById('overlayLayer');
+    // this.x = this.x>width ?0:this.x;
+    // this.x = this.x<0     ?width:this.x;
+    // this.y = this.y>height?0:this.y;
+    // this.y = this.y<0     ?height:this.y;
 
-// Get toggle menu button
-const toggleMenuButton = document.getElementById('toggleMenuBtn');
-
-// Get slider area
-const sliderArea = document.querySelector('#sliderArea');
-
-// Get slider items
-const sliderItems = Array.from(document.querySelectorAll('.testimonial__slider .testimonial__slide'));
-
-// Get number of slides
-const slidesCount = sliderItems.length;
-
-// Get previous and next buttons
-const nextButton = document.querySelector('#sliderNextBtn');
-const previousButton = document.querySelector('#sliderPrevBtn');
-
-// Get slide width
-var slideWidth = sliderItems[0].offsetWidth;
-
-// Set current slide
-var currentSlide = 0;
-
-// Function definitions
-let preventMneuLinksFronFoucs;
-
-// Handle (resize) events
-window.addEventListener('resize', () => {
-  // Call functions
-  preventMneuLinksFronFoucs();
-  updateSlideWidth();
+    if(this.x < 0|| this.x > width)this.xA*=-1;
+    if(this.y < 0|| this.y > width)this.yA*=-1;
+  }
+  draw(alpha){
+    ctx.beginPath()
+    ctx.fillStyle = `rgba(255,255,255,${ alpha/mouseradius*-1 + 1 })`;
+    ctx.arc(this.x,this.y,this.size,0,Math.PI * 2);
+    ctx.fill();
+  }
+}
+window.addEventListener("load",() => {
+  init();
+  animate();
+});
+const mouse={
+  x:undefined,
+  y:undefined
+}
+const mouseradius = 120;
+heroContainer.addEventListener("mousemove",(e) => {
+  // console.log(e);
+  mouse.x = e.x;
+  mouse.y = e.y;
+});
+// heroContainer.addEventListener("mouseover",()=>{
+//   init();
+//   animate();
+// });
+heroContainer.addEventListener("resize",()=>{
+  particals=[];
+  if(currentAnimationFrame != undefined){
+    console.log(currentAnimationFrame);
+    cancelAnimationFrame(currentAnimationFrame);
+  }
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+  console.log(canvas.width,canvas.height);
+  init();
+  animate();
 });
 
-// Handle (click) event on (previous) and (next) buttons
-nextButton.addEventListener('click', nextSlide);
-previousButton.addEventListener('click', previousSlide);
 
-// Handle (click) events
-toggleMenuButton.addEventListener('click', function() {
-  // Check, if the (aria-expanded) value is (false)
-  if(toggleMenuButton.getAttribute('aria-expanded') == 'false') {
-    // Call function
-    openMneu();
-  }else { // Else
-    // Call function
-    closeMenu();
-  };
-});
-overlay.addEventListener('click', closeMenu);
-
-// When scroll change, add class on (header) (the scroll effect of header)
-window.addEventListener('scroll', function(e) {
-  if(this.scrollY > header.offsetHeight / 2) {
-    header.classList.add('header--active');
-  }else {
-    header.classList.remove('header--active');
+var particals = [];
+function init() {
+  for(let i=0;i<250;i++){
+    particals.push(new Particle());
   }
-});
+}
 
-// Open mneu function
-function openMneu() {
-  toggleMenuButton.setAttribute('aria-expanded', 'true');
-  toggleMenuButton.classList.add('toggle-menu--active');
+function resetCanvas(){
+  ctx.beginPath();
+  ctx.fillStyle="rgba(0,0,0,1)";
+  ctx.fillRect(0,0,width,height);
 
-  document.body.classList.add('scroll-hide');
-  menuList.classList.add('navbar__menu--open');
-  menuList.querySelectorAll('a').forEach(link => {
-    link.setAttribute('tabindex', '0');
-  });
-  overlay.classList.add('header__overlay--open');
-
-  // Listen for (keydown)
-  document.addEventListener('keydown', handleKeyDown);
-
-  // Handle key down function 
-  function handleKeyDown(e) {
-    if(e.code == 'Tab') {
-      // Call function
-      menuFocusSystem();
-      // Remove the (event listener)
-      document.removeEventListener('keydown', handleKeyDown);
-    };
-  };
-};
-
-// Close mneu function
-function closeMenu() {
-  toggleMenuButton.setAttribute('aria-expanded', 'false');
-  toggleMenuButton.classList.remove('toggle-menu--active');
-  
-  document.body.classList.remove('scroll-hide');
-  menuList.classList.remove('navbar__menu--open');
-  menuList.querySelectorAll('a').forEach(link => {
-    link.setAttribute('tabindex', '-1');
-  });
-  overlay.classList.remove('header__overlay--open');
-};
-
-// Menu focus system function (to control the focus, of the menu when open)
-function menuFocusSystem() {
-  // Get first and last child of (menuList)
-  const firstChild = menuList.querySelectorAll('a')[0];
-  const lastChild = menuList.querySelectorAll('a')[menuList.childElementCount - 1];
-
-  // Focus the first item of the menu List
-  setTimeout(() => {
-    menuList.querySelectorAll('a')[0].focus();
-  }, 100);
-
-  // Keep focus inside menu
-  menuList.addEventListener('focusin', function(e) {
-    if(e.target == lastChild) {
-      e.target.addEventListener('focusout', function() {
-        toggleMenuButton.focus();
-      });
-    };
-  });
-};
-
-// Prevent menu links from focus function
-(preventMneuLinksFronFoucs = function () {
-  if(window.innerWidth < 640) {
-    menuList.querySelectorAll('a').forEach(link => {
-      link.setAttribute('tabindex', '-1');
-    });
-  }else {
-    menuList.querySelectorAll('a').forEach(link => {
-      link.setAttribute('tabindex', '0');
-    });
+}
+function animate(){
+  ctx.clearRect(0,0,width,height);
+  // resetCanvas();
+  for(let i=0;i<particals.length;i++){
+    const particle = particals[i];
+    particle.update();
+    const dx = mouse.x - particle.x,dy = mouse.y - particle.y,distance = Math.sqrt(dx*dx + dy*dy);
+    if(distance < mouseradius){
+      for(let j=0;j<particals.length;j++){
+        if(particals[j] != particle){
+          const ddx = particals[j].x - particle.x,ddy = particals[j].y - particle.y,ddistance = Math.sqrt(ddx*ddx + ddy*ddy);
+          if(ddistance < mouseradius){
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(255,255,255,${distance/mouseradius* -1 + 1})`;
+            ctx.moveTo(particle.x,particle.y);
+            ctx.lineTo(particals[j].x,particals[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      particals[i].draw(distance);
+    }
   }
-})();
-
-// Update slide width function
-function updateSlideWidth() {
-  // Set up (slideWidth) value
-  slideWidth = sliderItems[0].offsetWidth;
-
-  // Set (marginLeft) of the (sliderArea)
-  sliderArea.style.marginLeft = `-${slideWidth * currentSlide}px`;
-};
-
-// Next slide function
-function nextSlide() {
-  if(!nextButton.classList.contains('disabled')) {
-    // increment (currentSlide);
-    currentSlide++;
-    
-    // Call function
-    sliderChecker();
-  }
-};
-
-// Previous slide function
-function previousSlide() {
-  if(!previousButton.classList.contains('disabled')) {
-    // Decrement (currentSlide);
-    currentSlide--;
-    
-    // Call function
-    sliderChecker();
-  }
-};
-
-// Slider checker
-function sliderChecker() {
-  // Multiply (slideWidth) with (currentSlide)
-  let sliderMove = slideWidth * currentSlide;
-
-  // Move (sliderArea) with the (sliderMove) value
-  sliderArea.style.marginLeft = `-${sliderMove}px`;
-
-  // Check if (currentslide) is the first
-  if(currentSlide == 0) {
-    // Add (disabled) class on (previousButton)
-    previousButton.classList.add('disabled');
-
-    // Move the focus on (nextButton)
-    nextButton.focus();
-  }else { // Else
-    // Remove (disabled) class from (previousButton)
-    previousButton.classList.remove('disabled');
-  };
-
-  // Check if (currentslide) is the last
-  if(currentSlide == slidesCount - 1) {
-    // Add (disabled) class on (nextButton)
-    nextButton.classList.add('disabled');
-
-    // Move the focus on (previousButton)
-    previousButton.focus();
-  }else { // Else
-    // Remove (disabled) class from (nextButton)
-    nextButton.classList.remove('disabled');
-  };
-};
+  window.currentAnimationFrame = window.requestAnimationFrame(animate);
+}

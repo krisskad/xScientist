@@ -1,0 +1,140 @@
+li,a,button{
+  font-weight: 500;
+  text-decoration: none;
+  color: #EDF0F1;
+}
+header{
+  display: flex;
+  height: fit-content;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #24252a;
+  transition: height .25s ease;
+  overflow: hidden;
+  height: 101px;
+  z-index: 1000;
+}
+header .head{
+  width: 100%;
+  max-width: 150px;
+  max-height: 80px;
+  height: 5rem;
+  padding: 10px 0px;
+}
+header .head .icon{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+}
+.menu__content{
+  display: none;
+  align-items: center;
+}
+.menu__content .menu{
+  width: 20px;
+  fill: #EDF0F1;
+  cursor: pointer;
+}
+.menu__content input{
+  display: none;
+}
+.nav__link-ul{
+  list-style: none;
+}
+.nav__link-ul li{
+  display: inline-block;
+}
+.nav__link-ul li a{
+  padding: 5px 20px;
+  transition: all 0.3s ease 0s;
+  border-radius: 5px;
+  letter-spacing: 0px;
+  /* background-color: rgba(var(--color-light-rgb),0); */
+  /* border-bottom: 0px solid #2FE2EF; */
+}
+.nav__link-ul li a:hover{
+  letter-spacing: 1px;
+  /* background-color: rgba(var(--color-light-rgb),.2); */
+}
+header a button{
+  margin: 20px;
+  padding: 9px 25px;
+  background-color: rgba(0,136,169,1);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+
+
+
+/* Media Query */
+
+
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  .nav__link-ul li a{
+    padding: 5px 10px;
+  }
+
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  header{
+    flex-direction: column;
+    height: 350px;
+  }
+  header .head{
+    max-width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+  }
+  header .head .icon{
+    max-width: 150px;
+    /* height: 80px; */
+  }
+  nav{
+    width: 100%;
+  }
+  .menu__content{
+    display: grid;
+    margin-right: 20px;
+  }
+  .nav__link-ul li,.nav__link-ul li a{
+    display: block;
+  }
+  .nav__link-ul li a{
+    padding: 10px 30px;
+  border-radius: 0;
+  }
+  .nav__link-ul li a:hover{
+    background-color: #313238;
+  }
+  header, header .head, header nav{
+    border-bottom: 1px solid #333;
+  }
+}
+
+
+
+/* Toggle header */
+header.close{
+  height: 101px;
+}

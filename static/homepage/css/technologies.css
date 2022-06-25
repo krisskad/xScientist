@@ -1,0 +1,6 @@
+#technologies .card{
+    transition: all .25s;
+}
+#technologies .card:hover{
+    background-color: #FFFFFF22;
+}

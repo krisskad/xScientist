@@ -1,0 +1,38 @@
+#team .member{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* min-height: 300px; */
+    aspect-ratio: 3/4;
+}
+#team .member .icons{
+    display: grid;
+    gap: .5rem;
+}
+#team .member .icons a{
+    width: min-content;
+}
+#team .member .icons a:hover svg{
+    width:  1.8rem;
+    height: 1.8rem;
+}
+#team .member .icons a svg{
+    width:  1.5rem;
+    height: 1.5rem;
+    fill: #FFFFFF;
+    transition: all .25s;
+}
+#team .member{
+    background-size: 300px;
+    filter: grayscale(1);
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all 1s;
+    border-radius: 8px;
+    box-shadow: 0 40px 40px -30px #000000;
+}
+#team .member:hover{
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 600px;
+}

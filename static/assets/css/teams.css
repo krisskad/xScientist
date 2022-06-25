@@ -1,0 +1,104 @@
+#teams,#about{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2rem 5rem;
+}
+#teams .teams_title{
+  font-size: 2rem;
+  width: 100%;text-align: center;
+}
+#teams .member{
+  width: 200px;
+  height: 350px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#teams .member .icons{
+  display: grid;
+  gap: .5rem;
+}
+#teams .member .icons a{
+  width: min-content;
+}
+#teams .member .icons a:hover svg{
+  width:  1.8rem;
+  height: 1.8rem;
+}
+#teams .member .icons a svg{
+  width:  1.5rem;
+  height: 1.5rem;
+  fill: #FFFFFF;
+  transition: all .25s;
+}
+#teams .member{
+  background-size: 300px;
+  filter: grayscale(1);
+  background-position: center center;
+  background-repeat: no-repeat;
+  transition: all 1s;
+  border-radius: 8px;
+  box-shadow: 0 40px 40px -30px #000000;
+}
+#teams .member:hover{
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-size: 600px;
+}
+#teams .member1{
+  background-image: url('https://loremflickr.com/300/400/man?random=1');
+}
+#teams .member2{
+  background-image: url('https://loremflickr.com/300/400/man?random=2');
+}
+#teams .member3{
+  background-image: url('https://loremflickr.com/300/400/man?random=3');
+}
+#teams .member4{
+  background-image: url('https://loremflickr.com/300/400/man?random=4');
+}
+#teams .member5{
+  background-image: url('https://loremflickr.com/300/400/man?random=5');
+}
+@media only screen and (max-width: 1240px) {
+  #teams{
+    /* padding-top: 101px;
+    gap: 5rem; */
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 992px) {
+  #teams{
+    gap: 3rem 4rem;
+    height: auto;
+  }
+  .member{
+    width: 150px;
+    height: 300px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (max-width: 768px) {
+  #teams{
+    /* padding-top: 101px; */
+    gap: 5rem;
+  }
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  #teams{
+    padding-top: 10px;
+  }
+}
+@media only screen and (max-width: 540px) {
+  #teams{
+    padding-top: 110px;
+  }
+}
