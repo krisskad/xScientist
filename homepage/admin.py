@@ -1,19 +1,33 @@
 from django.contrib import admin
-from homepage.models import Slogan, HeroImage, OurWork, OurTeam
+from homepage.models import OurWork, OurTeam, Company, Technology
 
 
-class SloganAdmin(admin.ModelAdmin):
-    list_display = ('text', 'created_date', 'updated_date')
+# class SloganAdmin(admin.ModelAdmin):
+#     list_display = ('text', 'created_date', 'updated_date')
+#
+#
+# admin.site.register(Slogan, SloganAdmin)
 
 
-admin.site.register(Slogan, SloganAdmin)
+# class HeroImageAdmin(admin.ModelAdmin):
+#     list_display = ('image_url', 'image_source', 'created_date', 'updated_date')
+#
+#
+# admin.site.register(HeroImage, HeroImageAdmin)
 
 
-class HeroImageAdmin(admin.ModelAdmin):
-    list_display = ('image_url', 'image_source', 'created_date', 'updated_date')
+class CompanyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'created_date', 'updated_date')
 
 
-admin.site.register(HeroImage, HeroImageAdmin)
+admin.site.register(Company, CompanyAdmin)
+
+
+class TechnologyAdmin(admin.ModelAdmin):
+    list_display = ('name', 'created_date', 'updated_date')
+
+
+admin.site.register(Technology, TechnologyAdmin)
 
 
 class OurWorkAdmin(admin.ModelAdmin):
