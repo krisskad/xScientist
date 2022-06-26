@@ -84,3 +84,14 @@ class OurTeam(models.Model):
         return self.name
 
 
+class Message(models.Model):
+    sender_name = models.CharField(max_length=255, null=True, blank=True)
+    sender_email = models.TextField(null=True, blank=True)
+    sender_message = models.TextField(null=True, blank=True)
+    created_date = models.DateTimeField(auto_now_add=True)
+    updated_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.sender_email
+
+

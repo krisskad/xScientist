@@ -68,7 +68,7 @@
                 <a class="nav-link px-3" href="#career">Career</a>
               </li>
             </ul>
-            <a class="btn btn-primary bg-primary-theme rounded-pill px-4 btn-sm mb-3 mb-3 mb-sm-3 mb-lg-0 mb-xl-0" href="#contact">Login</a>
+            <a class="btn btn-primary bg-primary-theme rounded-pill px-4 btn-sm mb-3 mb-3 mb-sm-3 mb-lg-0 mb-xl-0" href="{% url 'login'  %}">Login</a>
           </div>
         </div>
       </nav>
@@ -237,32 +237,35 @@
       <p class="fs-3 fw-bold text-light text-center">Contact Us</p>
       <div class="row">
         <div class="col-12 col-lg-6">
-          <form class="p-3 p-md-0">
+          <form class="p-3 p-md-0" method="post" action="/send_email/">
+            {% csrf_token %}
             <div class="mb-3">
               <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="user@email.com" aria-describedby="emailHelp">
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="user@email.com" aria-describedby="emailHelp">
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
               <label for="nameInput" class="form-label">Your Name</label>
-              <input type="text" class="form-control" id="nameInput" placeholder="Nickname">
+              <input type="text" class="form-control" id="nameInput" name="name" placeholder="Nickname">
             </div>
             <div class="mb-3">
-              <label for="nameInput" class="form-label">Comments</label>
+              <label for="floatingTextarea2" class="form-label">Message</label>
               <div class="form-floating">
-                <textarea class="form-control text-dark" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea name="message" class="form-control text-dark" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
                 <label for="floatingTextarea2" class="text-dark">Comments</label>
               </div>
             </div>
-            <div class="mb-3 form-check">
-              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-              <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
+<!--            <div class="mb-3 form-check">-->
+<!--              <input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--              <label class="form-check-label" for="exampleCheck1">Check me out</label>-->
+<!--            </div>-->
             <button type="submit" class="btn btn-primary">Send</button>
           </form>
         </div>
         <div class="col-12 col-lg-6">
-          <img src="https://imgs.search.brave.com/eAmeheBrOQXb9UMvM3xW0HBk-ezdf2Bsa1UC9zdPbI0/rs:fit:780:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5s/QVR2SzZuczVmTWhC/Y3pvRzdQUEJBSGFF/ZyZwaWQ9QXBp" alt="demo" class="img-responsive w-100">
+<!--          <img src="https://imgs.search.brave.com/eAmeheBrOQXb9UMvM3xW0HBk-ezdf2Bsa1UC9zdPbI0/rs:fit:780:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5s/QVR2SzZuczVmTWhC/Y3pvRzdQUEJBSGFF/ZyZwaWQ9QXBp" alt="demo" class="img-responsive w-100">-->
+                    <iframe style="border: none;filter: invert(90%);width: 100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5976.797736987076!2d73.48963800793962!3d18.09791383962155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc280133acf673b%3A0x20d24609588efe54!2zMTjCsDA1JzU0LjkiTiA3M8KwMjknMTYuMyJF!5e0!3m2!1sen!2sin!4v1647270566322!5m2!1sen!2sin" width="400" height="400" style="border:0;" allowfullscreen="none" loading="lazy"></iframe>
+
         </div>
       </div>
     </section>

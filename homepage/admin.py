@@ -1,5 +1,5 @@
 from django.contrib import admin
-from homepage.models import OurWork, OurTeam, Company, Technology
+from homepage.models import OurWork, OurTeam, Company, Technology, Message
 
 
 # class SloganAdmin(admin.ModelAdmin):
@@ -42,3 +42,10 @@ class OurTeamAdmin(admin.ModelAdmin):
 
 
 admin.site.register(OurTeam, OurTeamAdmin)
+
+
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ('sender_email', 'created_date', 'updated_date')
+
+
+admin.site.register(Message, MessageAdmin)
