@@ -31,42 +31,74 @@ def index(request):
             "company":company,
             "technology":technology
         }
-        return render(request, 'homepage/index.html', context)
 
+        if request.method == "GET":
+            return render(request, 'homepage/index.html', context)
+        else:
+            name = request.POST.get('name', '')
+            message = request.POST.get('message', '')
+            from_email = request.POST.get('email', '')
+            subject = f"xScientist | Message from {name}"
+            body = f"{message} \n sent by : {from_email}"
 
-def send_email(request):
-    name = request.POST.get('name', '')
-    message = request.POST.get('message', '')
-    from_email = request.POST.get('email', '')
-    subject = f"xScientist | Message from {name}"
-    body = f"{message} \n sent by : {from_email}"
-
-    ##### save ######
-
-    Message.objects.create(
-        sender_name = name,
-        sender_email = from_email,
-        sender_message = message
-    )
-
-    if name and message and from_email:
-        try:
-            # send_mail(subject, body, settings.EMAIL_HOST_USER, ['krishna.g.kadam98500@gmail.com'])
-            html_path = os.path.join(settings.BASE_DIR, "templates", "homepage", "welcome_email.html")
-            msg_html = render_to_string(html_path, {'name': name})
-
-            send_mail(
-                subject = "xScientist",
-                message= f"Hi {name}, \n\n Thank you for visiting and sharing your thoughts with us. \n\n Regards \n xScientist Tech LLP \n xscientist.in",
-                from_email=settings.EMAIL_HOST_USER,
-                recipient_list = [from_email, ],
-                html_message=msg_html
+            Message.objects.create(
+                sender_name=name,
+                sender_email=from_email,
+                sender_message=message
             )
 
-        except BadHeaderError:
-            return HttpResponseRedirect('home')
-        return HttpResponseRedirect('home')
-    else:
-        # In reality we'd use a form class
-        # to get proper validation errors.
-        return HttpResponseRedirect('home')
+            if name and message and from_email:
+                try:
+                    # send_mail(subject, body, settings.EMAIL_HOST_USER, ['krishna.g.kadam98500@gmail.com'])
+                    html_path = os.path.join(settings.BASE_DIR, "templates", "homepage", "welcome_email.html")
+                    msg_html = render_to_string(html_path, {'name': name})
+
+                    send_mail(
+                        subject="xScientist",
+                        message=f"Hi {name}, \n\n Thank you for visiting and sharing your thoughts with us. \n\n Regards \n xScientist Tech LLP \n xscientist.in",
+                        from_email=settings.EMAIL_HOST_USER,
+                        recipient_list=[from_email, ],
+                        html_message=msg_html
+                    )
+                except Exception as e:
+                    print(e)
+
+            return render(request, 'homepage/index.html', context)
+
+
+# def send_email(request):
+#     name = request.POST.get('name', '')
+#     message = request.POST.get('message', '')
+#     from_email = request.POST.get('email', '')
+#     subject = f"xScientist | Message from {name}"
+#     body = f"{message} \n sent by : {from_email}"
+#
+#     ##### save ######
+#
+#     Message.objects.create(
+#         sender_name = name,
+#         sender_email = from_email,
+#         sender_message = message
+#     )
+#
+#     if name and message and from_email:
+#         try:
+#             # send_mail(subject, body, settings.EMAIL_HOST_USER, ['krishna.g.kadam98500@gmail.com'])
+#             html_path = os.path.join(settings.BASE_DIR, "templates", "homepage", "welcome_email.html")
+#             msg_html = render_to_string(html_path, {'name': name})
+#
+#             send_mail(
+#                 subject = "xScientist",
+#                 message= f"Hi {name}, \n\n Thank you for visiting and sharing your thoughts with us. \n\n Regards \n xScientist Tech LLP \n xscientist.in",
+#                 from_email=settings.EMAIL_HOST_USER,
+#                 recipient_list = [from_email, ],
+#                 html_message=msg_html
+#             )
+#
+#         except BadHeaderError:
+#             return HttpResponseRedirect('home')
+#         return HttpResponseRedirect('home')
+#     else:
+#         # In reality we'd use a form class
+#         # to get proper validation errors.
+#         return HttpResponseRedirect('home')
