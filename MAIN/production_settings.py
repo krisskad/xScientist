@@ -29,11 +29,16 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', 'xscientist.in', 'xscientist.herokuapp.com', '0.0.0.0', '127.0.0.1', 'www.xscientist.in']
+ALLOWED_HOSTS = ['localhost', 'xscientist.in', 'xscientist.herokuapp.com', '0.0.0.0', '127.0.0.1', 'www.xscientist.in', ]
 
 # Application definition
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+CSRF_TRUSTED_ORIGINS = ["https://xscientist.herokuapp.com/", ]
+CORS_ORIGIN_WHITELIST = (
+  'https://xscientist.herokuapp.com/',
+)
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

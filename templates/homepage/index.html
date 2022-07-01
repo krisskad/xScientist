@@ -48,7 +48,7 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mx-auto notification-badges">
               <li class="nav-item">
                 <a class="nav-link px-3 active" aria-current="page" href="#home">Home</a>
               </li>
@@ -64,7 +64,7 @@
               <li class="nav-item">
                 <a class="nav-link px-3" href="#team">Team</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" data-badge="open">
                 <a class="nav-link px-3" href="#career">Career</a>
               </li>
             </ul>
@@ -163,7 +163,7 @@
                 <div class="timeline-content" data-toggle="popover" data-trigger="hover" data-placement="top" title="" data-content="And here's some amazing content. It's very engaging. Right?" data-original-title="2020">
                   <div class="inner-circle"></div>
                   <p class="h6 mt-3 mb-1">2022</p>
-                  <p class="h6 text-muted mb-0 mb-lg-0">Built Startup</p>
+                  <p class="h6 text-muted mb-0 mb-lg-0">Startup Formation</p>
                 </div>
               </div>
             </div>
@@ -240,7 +240,7 @@
           <form class="p-3 p-md-0" method="post" action="/send_email/">
             {% csrf_token %}
             <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
+              <label for="exampleInputEmail1" class="form-label">Email Address</label>
               <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="user@email.com" aria-describedby="emailHelp">
               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
@@ -264,8 +264,7 @@
         </div>
         <div class="col-12 col-lg-6">
 <!--          <img src="https://imgs.search.brave.com/eAmeheBrOQXb9UMvM3xW0HBk-ezdf2Bsa1UC9zdPbI0/rs:fit:780:225:1/g:ce/aHR0cHM6Ly90c2U0/Lm1tLmJpbmcubmV0/L3RoP2lkPU9JUC5s/QVR2SzZuczVmTWhC/Y3pvRzdQUEJBSGFF/ZyZwaWQ9QXBp" alt="demo" class="img-responsive w-100">-->
-                    <iframe style="border: none;filter: invert(90%);width: 100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5976.797736987076!2d73.48963800793962!3d18.09791383962155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc280133acf673b%3A0x20d24609588efe54!2zMTjCsDA1JzU0LjkiTiA3M8KwMjknMTYuMyJF!5e0!3m2!1sen!2sin!4v1647270566322!5m2!1sen!2sin" width="400" height="400" style="border:0;" allowfullscreen="none" loading="lazy"></iframe>
-
+                    <iframe style="border: none;filter: invert(90%);width: 100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1876.1147400310576!2d75.3561281148592!3d19.872529647112106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bdba291ff049cc3%3A0xfd49ceb71392bf63!2sBombay%20High%20Court%20Aurangabad%20Bench!5e0!3m2!1sen!2sin!4v1656699669185!5m2!1sen!2sin" width="400" height="400" style="border:0;" allowfullscreen="none" loading="lazy"></iframe>
         </div>
       </div>
     </section>
