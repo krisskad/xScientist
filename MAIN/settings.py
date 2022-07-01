@@ -1,5 +1,5 @@
 import os
-DEBUG = True
+DEBUG = False
 if DEBUG:
     from MAIN.local_settings import *
 else:
